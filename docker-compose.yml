@@ -1,0 +1,22 @@
+version: "3"
+services:
+  postgis:
+    image: pgrouting/pgrouting
+    ports: 
+      - 5432:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=ugis
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=db_gis  
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment: 
+        PGADMIN_DEFAULT_EMAIL: "test@pgadmin.com" 
+        PGADMIN_DEFAULT_PASSWORD: "test"  
+    ports:
+      - 9090:80
+    depends_on:
+      - postgis 
